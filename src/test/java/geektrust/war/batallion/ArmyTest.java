@@ -22,6 +22,14 @@ class ArmyTest {
     }
 
     @Test
+    public void shouldIndicateNoHelp()
+    {
+        Army army = new Army(0, "H");
+        assertEquals(1, army.fight(1));
+    }
+
+
+    @Test
     public void shouldFightAndCompensateArmyWithHalfStrength()
     {
         Army army = new Army(15, "H");
@@ -38,6 +46,14 @@ class ArmyTest {
         assertEquals(1, army.compensate(Conversion.HALF, 5));
         assertEquals("15H", army.generateUsageReport());
     }
+
+    @Test
+    public void shouldNotCompensateFraction()
+    {
+        Army army = new Army(7, "H");
+        assertEquals(13, army.compensate(Conversion.HALF, 20));
+    }
+
 
 
 }

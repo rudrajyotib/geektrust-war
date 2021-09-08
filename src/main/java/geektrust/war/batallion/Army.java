@@ -11,18 +11,22 @@ public class Army {
         this.suffix = suffix;
     }
 
+    public String getSuffix() {
+        return suffix;
+    }
+
     public int fight(int opponentSize) {
         return compensate(Conversion.SELF, opponentSize);
     }
 
     public int compensate(Conversion conversion, int unitsToCompensate) {
         if (this.size == 0) {
-            return 0;
+            return unitsToCompensate;
         }
 
-        int unitsNeeded = conversion.convertUnit(unitsToCompensate);
+        int unitsNeeded = conversion.convertUnit(Math.round(unitsToCompensate/ 2.0f));
         if (unitsNeeded >= this.size) {
-            int compensationShortage = unitsToCompensate - this.size * conversion.getConversionRate();
+            int compensationShortage = (int) (unitsToCompensate - this.size * conversion.getConversionRate() * 2);
             this.unitUsed += this.size;
             this.size = 0;
             return Math.max(compensationShortage, 0);

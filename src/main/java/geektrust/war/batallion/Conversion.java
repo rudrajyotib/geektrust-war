@@ -2,27 +2,23 @@ package geektrust.war.batallion;
 
 public enum Conversion {
 
-    SELF(2),
-    HALF(1),
-    DOUBLE(4);
+    SELF(1),
+    HALF(0.5f),
+    DOUBLE(2);
 
-    private final int conversionRate;
+    private final float conversionRate;
 
-    Conversion(int conversionRate) {
+    Conversion(float conversionRate) {
         this.conversionRate = conversionRate;
     }
 
-    public int getConversionRate()
+    public float getConversionRate()
     {
         return this.conversionRate;
     }
 
     public int convertUnit(int units)
     {
-        if ((units % this.conversionRate) == 0)
-        {
-            return units/conversionRate;
-        }
-        return (units / conversionRate) + 1;
+        return Math.round(units/this.conversionRate);
     }
 }
